@@ -121,7 +121,7 @@
         <!--PageVC-->
         <scene sceneID="GdH-L1-jS5">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="rmj-nC-77a" customClass="PageVC" customModule="WeatherGift" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rmj-nC-77a" customClass="PageVC" customModule="WeatherGift" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u12-Ia-p1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2148" y="139"/>
