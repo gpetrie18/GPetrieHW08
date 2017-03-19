@@ -11,7 +11,7 @@
         <!--DetailVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="DetailVC" customModule="WeatherGift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailVC" id="BYZ-38-t0r" customClass="DetailVC" customModule="WeatherGift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -62,6 +62,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="currentImage" destination="PJm-Jl-WAb" id="kuo-WB-SS5"/>
+                        <outlet property="dateLabel" destination="o3I-vz-Y3s" id="ADX-nk-JIm"/>
+                        <outlet property="locationLabel" destination="GmH-H3-gOv" id="cMy-jm-Gid"/>
+                        <outlet property="summaryLabel" destination="lWT-8z-fiy" id="mEn-XP-J56"/>
+                        <outlet property="temperatureLabel" destination="lHw-79-h94" id="ast-1K-Ulf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
