@@ -22,7 +22,7 @@ class PageVC: UIPageViewController {
     
     let barButtonWidth: CGFloat = 44
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +34,7 @@ class PageVC: UIPageViewController {
         configurePageConrol()
         configureListButton()
         
-
+        
     }
     
     //Mark: - UI Configuration Methods
@@ -48,6 +48,7 @@ class PageVC: UIPageViewController {
         pageControl.currentPageIndicatorTintColor = UIColor.black
         pageControl.numberOfPages = locationsArray.count
         pageControl.currentPage = currentPage
+        pageControl.addTarget(self, action: #selector(pageControlPressed), for: .touchUpInside)
         
         view.addSubview(pageControl)
     }
@@ -67,8 +68,26 @@ class PageVC: UIPageViewController {
         
     }
     
-    func segueToLocationsVC() {
-        print ("fuck you")
+    //Mark: - Segues
+    
+    func segueToLocationsVC(sender: UIButton!) {
+        performSegue(withIdentifier: "ToListVC", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToListVC"{
+            let controller = segue.destination as! ListVC
+            controller.locationsArray = locationsArray
+            controller.currentPage = currentPage
+        }
+    }
+    
+    
+    
+    @IBAction func unwindFromListVC(sender: UIStoryboardSegue) {
+        pageControl.numberOfPages = locationsArray.count
+        pageControl.currentPage = currentPage
+        setViewControllers([createDetailVC(forPage: currentPage)], direction: .forward, animated: false, completion: nil)
     }
     
     //Mark: - Create View Controller for UIPageViewController
@@ -88,8 +107,8 @@ class PageVC: UIPageViewController {
         
         
     }
-
-
+    
+    
 }
 
 
@@ -126,5 +145,17 @@ extension PageVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate{
             
         }
         
+    }
+    
+    func pageControlPressed() {
+        if let currentViewController = self.viewControllers?[0] as? DetailVC {
+            currentPage = currentViewController.currentPage
+            if pageControl.currentPage < currentPage {
+                setViewControllers([createDetailVC(forPage: pageControl.currentPage)], direction: .reverse, animated: true, completion: nil)
+            }else if pageControl.currentPage > currentPage {
+                setViewControllers([createDetailVC(forPage: pageControl.currentPage)], direction: .forward, animated: true, completion: nil)
+            }
+        }
+
     }
 }
