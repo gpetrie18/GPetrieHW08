@@ -58,8 +58,8 @@ class PageVC: UIPageViewController {
         
         listButton = UIButton(frame: CGRect(x: view.frame.width - barButtonWidth, y: view.frame.height - barButtonHeight, width: barButtonWidth, height: barButtonHeight))
         
-        listButton.setBackgroundImage(UIImage(named: "listButton"), for: .normal)
-        listButton.setBackgroundImage(UIImage(named: "listButtonHighlighted"), for: .highlighted)
+        listButton.setBackgroundImage(UIImage(named: "listbutton"), for: .normal)
+        listButton.setBackgroundImage(UIImage(named: "listbutton-highlighted"), for: .highlighted)
         
         listButton.addTarget(self, action: #selector(segueToLocationsVC), for: .touchUpInside)
         
