@@ -17,6 +17,9 @@ class PageVC: UIPageViewController {
     
     var pageControl: UIPageControl!
     
+    var listButton: UIButton!
+    
+    
     let barButtonWidth: CGFloat = 44
     
 
@@ -29,11 +32,12 @@ class PageVC: UIPageViewController {
         setViewControllers([createDetailVC(forPage: 0)], direction: .forward, animated: false, completion: nil)
         
         configurePageConrol()
+        configureListButton()
         
 
     }
     
-    
+    //Mark: - UI Configuration Methods
     func configurePageConrol() {
         let pageControlHeight: CGFloat = barButtonWidth
         let pageControlWidth: CGFloat = view.frame.width - (barButtonWidth * 2)
@@ -48,6 +52,26 @@ class PageVC: UIPageViewController {
         view.addSubview(pageControl)
     }
     
+    func configureListButton(){
+        let barButtonHeight = barButtonWidth
+        
+        listButton = UIButton(frame: CGRect(x: view.frame.width - barButtonWidth, y: view.frame.height - barButtonHeight, width: barButtonWidth, height: barButtonHeight))
+        
+        listButton.setBackgroundImage(UIImage(named: "listButton"), for: .normal)
+        listButton.setBackgroundImage(UIImage(named: "listButtonHighlighted"), for: .highlighted)
+        
+        listButton.addTarget(self, action: #selector(segueToLocationsVC), for: .touchUpInside)
+        
+        view.addSubview(listButton)
+        
+        
+    }
+    
+    func segueToLocationsVC() {
+        print ("fuck you")
+    }
+    
+    //Mark: - Create View Controller for UIPageViewController
     func createDetailVC(forPage page: Int) -> DetailVC {
         
         currentPage = min(max(0, page), locationsArray.count - 1)
