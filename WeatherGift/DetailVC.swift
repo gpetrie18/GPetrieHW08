@@ -39,11 +39,17 @@ class DetailVC: UIViewController {
     }
     
     func updateUserInterface() {
+        
+        let isHidden = (locationsArray[currentPage].currentTemp == -999.9)
+            temperatureLabel.isHidden = isHidden
+            locationLabel.isHidden = isHidden
+        
         locationLabel.text = locationsArray[currentPage].name
         dateLabel.text = locationsArray[currentPage].coordinates
         let curTemperature = String(format: "%3.f", locationsArray[currentPage].currentTemp) + "°"
         temperatureLabel.text = curTemperature
         print("%%% curTemperature inside updateUserInterface = \(curTemperature)")
+        summaryLabel.text = locationsArray[currentPage].dailySummary
         
     }
     

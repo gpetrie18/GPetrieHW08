@@ -11,7 +11,7 @@ import GooglePlaces
 
 
 class ListVC: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editBarButton: UIBarButtonItem!
     @IBOutlet weak var addBarButton: UIBarButtonItem!
@@ -21,7 +21,7 @@ class ListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
@@ -29,20 +29,20 @@ class ListVC: UIViewController {
         
         
     }
-//Mark: - Segues
+    //Mark: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ToPageVC" {
             let controller = segue.destination as! PageVC
             currentPage = (tableView.indexPathForSelectedRow?.row)!
             // Identify the table cell (row) that the user tapped.
-            // This is passed back as PageVC as currentPage, so that 
+            // This is passed back as PageVC as currentPage, so that
             // PageVC knows which page to create and display.
             controller.currentPage = currentPage
             controller.locationsArray = locationsArray
         }
     }
-
+    
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
         if tableView.isEditing == true {
             tableView.setEditing(false, animated: true)
@@ -93,7 +93,7 @@ extension ListVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath){
-
+        
         let itemToMove =
             locationsArray[sourceIndexPath.row]
         locationsArray.remove(at: sourceIndexPath.row)
@@ -124,12 +124,13 @@ extension ListVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    func updateTable(placeName: GMSPlace) {
+    func updateTable(place: GMSPlace) {
         var newLocation = WeatherLocation()
         newLocation.name = place.name
         let lat = place.coordinate.latitude
         let long = place.coordinate.longitude
         newLocation.coordinates = "\(lat), \(long)"
+        print(newLocation.coordinates)
         locationsArray.append(newLocation)
         tableView.reloadData()
     }
@@ -138,12 +139,14 @@ extension ListVC: UITableViewDataSource, UITableViewDelegate {
 extension ListVC: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
-    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+    func viewController(_ viewController: GMSAutocompleteViewController,
+        didAutocompleteWith place: GMSPlace) {
         print("Place name: \(place.name)")
         print("Place address: \(place.formattedAddress)")
         print("Place attributions: \(place.attributions)")
-        updateTable(placeName: place)
+        updateTable(place: place)
         dismiss(animated: true, completion: nil)
+        
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {

@@ -14,6 +14,7 @@ class WeatherLocation {
     var name = ""
     var coordinates = ""
     var currentTemp = -999.9
+    var dailySummary = ""
     
     func getWeather(completed: @escaping () -> ()) {
         
@@ -23,9 +24,9 @@ class WeatherLocation {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                if let temperature = json["currently"]["temperature"].double{
-                    print("Temp inside getWeather = \(temperature)")
-                    self.currentTemp = temperature
+                if let summary = json["daily"]["summary"].string {
+                    print("SUMMARY inside getWeather = \(summary)")
+                    self.dailySummary = summary
                 }else {
                     print("could not return a temperature!")
                 }
